@@ -1,12 +1,9 @@
-import { expressPlugin } from '@nammatham/express';
+import { expressPlugin } from 'nammatham';
 import { app } from './nammatham';
 import hello from './functions/hello';
 
 app.addFunctions(hello);
 
-app.register(
-  expressPlugin({
-    allowAllFunctionsAccessByHttp: true,
-  })
-);
+const dev = process.env.NODE_ENV === 'development';
+app.register(expressPlugin({ dev }));
 app.start();
